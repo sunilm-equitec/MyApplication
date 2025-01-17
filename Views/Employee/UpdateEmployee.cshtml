@@ -1,0 +1,107 @@
+﻿@model EmployeeManagementSystem.Models.Employee
+
+@{
+    ViewBag.Title = "UpdateEmployee";
+}
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <h4 class="mb-3">Employee Information</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.EmployeeID)
+
+    <!-- Employee Id -->
+    <div class="row mb-3">
+        <label for="employeeName" class="col-sm-2 col-form-label">Employee Id</label>
+        <div class="col-sm-10">
+            @Html.EditorFor(model => model.EmployeeID, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+            @Html.ValidationMessageFor(model => model.EmployeeID, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <!-- Employee Name -->
+    <div class="row mb-3">
+        <label for="employeeName" class="col-sm-2 col-form-label">Name</label>
+        <div class="col-sm-10">
+            @Html.EditorFor(model => model.EmployeeName, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.EmployeeName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <!-- Department Dropdown -->
+    <div class="row mb-3">
+        <label for="DepartmentID" class="col-sm-2 col-form-label">Department</label>
+        <div class="col-sm-10">
+            @Html.DropDownListFor(
+                model => model.DepartmentID,
+                new SelectList(ViewBag.Department, "DepartmentID", "DepartmentName", Model.DepartmentID),
+                "Select Department",
+                new { @class = "form-select" }
+            )
+            @Html.ValidationMessageFor(model => model.DepartmentID, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <!-- Date of Birth -->
+    <div class="row mb-3">
+        <label for="DOB" class="col-sm-2 col-form-label">Date of Birth</label>
+        <div class="col-sm-10">
+            @Html.TextBoxFor(model => model.DateOfBirth, new { @class = "form-control", id = "DOB", type = "date", @Value = Model.DateOfBirth.ToString("yyyy-MM-dd") })
+        </div>
+    </div>
+
+    <!-- Gender Radio Buttons -->
+    <div class="row mb-3">
+        <label class="col-sm-2 col-form-label">Gender</label>
+        <div class="col-sm-10">
+            <div class="form-check form-check-inline">
+                <input type="radio" id="genderMale" name="Gender" value="Male"
+                       @(Model.Gender == "Male" ? "checked" : "") class="form-check-input">
+                <label class="form-check-label" for="genderMale">Male</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input type="radio" id="genderFemale" name="Gender" value="Female"
+                       @(Model.Gender == "Female" ? "checked" : "") class="form-check-input">
+                <label class="form-check-label" for="genderFemale">Female</label>
+            </div>
+            @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <!-- Address -->
+    <div class="row mb-3">
+        <label for="Addres" class="col-sm-2 col-form-label">Address</label>
+        <div class="col-sm-10">
+            @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <!-- Mobile Number -->
+    <div class="row mb-3">
+        <label for="mobNumber" class="col-sm-2 col-form-label">Mobile Number</label>
+        <div class="col-sm-10">
+            @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <!-- Submit Button -->
+    <div class="row">
+        <div class="col-sm-10 offset-sm-2">
+            <button type="submit" class="btn btn-primary">Save</button>
+            @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-secondary ms-2" })
+        </div>
+    </div>
+
+</div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

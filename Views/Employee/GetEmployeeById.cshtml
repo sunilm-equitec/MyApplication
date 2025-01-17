@@ -1,0 +1,60 @@
+﻿@model EmployeeManagementSystem.Models.Employee
+
+@{
+    ViewBag.Title = "GetEmployeeById";
+}
+
+
+
+<div class="card mt-5">
+    <div class="card-header bg-primary text-white">
+        <h4 class="mb-0">Employee Information</h4>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <tbody>
+                    <tr>
+                        <th>Employee ID</th>
+                        <td>@Html.DisplayFor(model => model.EmployeeID)</td>
+                    </tr>
+                    <tr>
+                        <th>Name</th>
+                        <td>@Html.DisplayFor(model => model.EmployeeName)</td>
+                    </tr>
+                    <tr>
+                        <th>Department</th>
+                        <td>@Html.DisplayFor(model => model.DepartmentName)</td>
+                    </tr>
+
+                    <tr>
+                        <th>Date Of Birth</th>
+                        @*<td>@Html.DisplayFor(model => model.DOB.ToString("dd-MM-yyyy"))</td>*@
+                    <td>@Model.DateOfBirth.ToString("dd-MM-yyyy")</td>
+                    </tr>
+
+                    <tr>
+                        <th>Age</th>
+                        <td>@(DateTime.Now.Subtract(Model.DateOfBirth).Days / 365)</td>
+                    </tr>
+                    <tr>
+                        <th>Gender</th>
+                        <td>@Html.DisplayFor(model => model.Gender)</td>
+                    </tr>
+                    <tr>
+                        <th>Address</th>
+                        <td>@Html.DisplayFor(model => model.Address)</td>
+                    </tr>
+                    <tr>
+                        <th>Mobile Number</th>
+                        <td>@Html.DisplayFor(model => model.PhoneNumber)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="card-footer text-end">
+        @Html.ActionLink("Edit", "UpdateEmployee", new { id = Model.EmployeeID }, new { @class = "btn btn-warning me-2" })
+        @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-secondary" })
+    </div>
+</div>
